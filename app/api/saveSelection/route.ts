@@ -1,22 +1,25 @@
-"use server"
+"use server";
 
 import { NextResponse } from "next/server";
-import prisma from "../../lib/prisma"; // Assuming you are using Prisma
 
 export async function POST(req: Request) {
   try {
     const { date, food } = await req.json();
 
-    await prisma.selection.create({
-      data: { date, food: JSON.stringify(food) },
+    const response = await fetch("https://api.jsonbin.io/v3/b", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": "$2a$10$beK7lvBKl7.e4u5Z/SrKt.EafoVut9CoBcHouN4h3ZyOtAFTpbgNK", // Replace with your JSONBin secret key
+      },
+      body: JSON.stringify({ date, food }),
     });
 
-    return NextResponse.json({ success: true });
+    const data = await response.json();
+
+    return NextResponse.json({ success: true, binId: data.metadata.id });
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("Database Error:", error.message);
-    } else {
-      console.error("An unknown error occurred:", error);
-    }
+    console.error("Error saving data to JSONBin:", error);
+    return NextResponse.json({ success: false, error: "Failed to save data" }, { status: 500 });
   }
 }
