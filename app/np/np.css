@@ -1,0 +1,32 @@
+p {
+    text-align: center;
+    color: rgba(255, 0, 0, 0.607);
+    font-weight: bold;
+    font-size: 30px;
+    padding-bottom: 0px;
+  }
+
+  #yay {
+    color: (255, 0, 0, 0.607);
+    font-size: 25px;
+  }
+
+  .yay-img {
+    padding-top: 30px;
+  }
+
+.button {
+    margin-top: 0px;
+    padding: 12px 24px;
+    background-color: #ff66b2;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #ff3385;
+  }
