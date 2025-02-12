@@ -26,6 +26,6 @@
   },
   "scripts": {
   "build": "next build",
-  "postinstall": "npx prisma generate"
+  "postinstall": "npx prisma generate --schema=app/prisma/schema.prisma"
 }
 }
